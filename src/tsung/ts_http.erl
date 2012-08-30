@@ -231,7 +231,7 @@ add_dynparams(#http{session_cookies=DynCookie,user_agent=UA}, Req, _) ->
 subst(Req=#http_request{url=URL, body=Body, headers = Headers, cookie = Cookies,
                         userid=UserId, passwd=Passwd}, DynVars) ->
     Req#http_request{url = escape_url(ts_search:subst(URL, DynVars)),
-             body   = ts_search:subst(Body, DynVars),
+             body   = Body, % remove dynamic substitution on body for now
              headers = lists:foldl(fun ({Name, Value}, Result) ->
                                            [{Name, ts_search:subst(Value, DynVars)} | Result]
                                    end, [], Headers),
