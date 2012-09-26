@@ -60,7 +60,7 @@ parse_config(Element = #xmlElement{name=http},
                        list_to_binary(C);
                    FileName ->
 	                   ModFileName = ts_search:subst(FileName,DynVar),
-	                   io:format("Using file name ~p~n",ModFileName),
+	                   io:format("Using file name ~p~n",[ModFileName]),
                        {ok, FileContent} = file:read_file(ModFileName),
                        FileContent
                end,
