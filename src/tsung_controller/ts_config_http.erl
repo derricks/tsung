@@ -52,6 +52,7 @@ parse_config(Element = #xmlElement{name=http},
              Config=#config{curid = Id, session_tab = Tab, servers = Servers,
                             sessions = [CurS | _], dynvar=DynVar,
                             subst    = SubstFlag, match=MatchRegExp}) ->
+	io:format("dynamic variables ~p~n",[DynVar]),
     Version  = ts_config:getAttr(string,Element#xmlElement.attributes, version, "1.1"),
     URL      = ts_config:getAttr(Element#xmlElement.attributes, url),
     Contents = case  ts_config:getAttr(string, Element#xmlElement.attributes, contents_from_file) of
