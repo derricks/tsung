@@ -59,7 +59,9 @@ parse_config(Element = #xmlElement{name=http},
                        C=ts_config:getAttr(Element#xmlElement.attributes, contents),
                        list_to_binary(C);
                    FileName ->
-                       {ok, FileContent} = file:read_file(ts_search:subst(FileName,DynVar)),
+	                   ModFileName = ts_search:subst(FileName,DynVar),
+	                   io:format("Using file name ~p~n",ModFileName),
+                       {ok, FileContent} = file:read_file(ModFileName),
                        FileContent
                end,
     UseProxy = case ets:lookup(Tab,{http_use_server_as_proxy}) of
